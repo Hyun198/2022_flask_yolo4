@@ -49,14 +49,30 @@ def upload_gpx():
 
     vid_file_path = session.get('uploaded_vid_file_path',None)
 
-    path = "C:/Users/user-pc/Desktop/visual/project/static/gpx/"
+    path = ""
     new_path = path+gpx_filename
     read_gpx(new_path)
 
-    csv_path = 'C:/Users/user-pc/Desktop/visual/project/static/csv/route_df.csv'
+    csv_path = ''
     read_csv(csv_path)
+    
+    #frame divide
+    frame_path = ''
+    frame(frame_path)
+    
+    detect_path = ''
+    files = os.listdir(detect_path)
+    jpg_img = []
+    for file in files:
+        if '.jpg' in file:
+            f = cv2.imread(detect_path+"/"+file)
+            jpg_img.append(f)
+    
+    result = model(jpg_img)
+    os.chdir("../")
+    result.save(save_dir = 'result')
 
-    return render_template('public/display_vid.html', upload_vid=vid_file_path)
+    return render_template('public/display_vid.html', upload_vid=vid_file_path, path = frame_path)
 
 @app.route('/map')
 def map():
