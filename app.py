@@ -18,6 +18,8 @@ app.config['VIDEO_UPLOAD_FOLDER'] = VIDEO_UPLOAD_FOLDER
 app.config['GPX_UPLOAD_FOLDER'] = GPX_UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
+#model = torch.hub.load('.', 'custom', path='bestofbest.pt', source='local')
+
 @app.route("/")
 def index():
     return render_template("index.html")
